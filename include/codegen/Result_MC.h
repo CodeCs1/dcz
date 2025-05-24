@@ -51,5 +51,5 @@ class Constant_MC : public Result_MC {
 };
 class Function_MC : public Result_MC {
     public:
-        Function_MC();
+        Function_MC(){}
 };

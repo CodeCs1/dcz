@@ -6,7 +6,10 @@
 #include <list>
 #include <memory>
 
+#include <config.h>
+#ifdef COMPILER
 #include <codegen/Result_MC.h>
+#endif
 
 class Result_MC;
 class Function_MC;
@@ -43,7 +46,9 @@ class Expr {
         virtual std::string toString() const { return "not implemented!";}
         virtual ParserType Type() const {return EXPR;}
         virtual ~Expr() = default;
+        #ifdef COMPILER
         virtual Result_MC* codegen() = 0;
+        #endif
 };
 
 class Binary : public Expr {
@@ -56,8 +61,9 @@ class Binary : public Expr {
             return left->toString() + " " + this->data.token + " " + right->toString();
         }
         ParserType Type() const override { return BINARY; }
-
+        #ifdef COMPILER
         Result_MC* codegen() override;
+        #endif
 
 };
 
@@ -69,7 +75,9 @@ class Literal : public Expr {
             return str.token;
         }
         ParserType Type() const override { return LITERAL; }
+        #ifdef COMPILER
         Result_MC* codegen() override;
+        #endif
 };
 
 class Grouping : public Expr {
@@ -80,7 +88,9 @@ class Grouping : public Expr {
             return "( " + expr->toString()+ " )"; 
         }
         ParserType Type() const override { return GROUPING; }
+        #ifdef COMPILER
         Result_MC* codegen() override {return NULL;}
+        #endif
 };
 
 class Unary : public Expr {
@@ -92,7 +102,9 @@ class Unary : public Expr {
             return expr->toString();
         }
         ParserType Type() const override { return UNARY; }
+        #ifdef COMPILER
         Result_MC* codegen() override {return nullptr;}
+        #endif
 };
 
 class Statement : public Expr {
@@ -109,7 +121,9 @@ class Statement : public Expr {
         ParserType Type() const override {
             return STATEMENT;
         }
-        Result_MC* codegen() override {return NULL;}
+        #ifdef COMPILER
+        Result_MC* codegen() override;
+        #endif
 };
 
 class Variable : public Expr {
@@ -128,7 +142,9 @@ class Variable : public Expr {
         ParserType Type() const override {
             return VARIABLE;
         }
+        #ifdef COMPILER
         Result_MC* codegen() override;
+        #endif
 };
 
 class Var : public Expr {
@@ -144,7 +160,9 @@ class Var : public Expr {
         ParserType Type() const override {
             return VAR;
         }
+        #ifdef COMPILER
         Result_MC* codegen() override;
+        #endif
 };
 
 class Assign : public Expr {
@@ -161,7 +179,9 @@ class Assign : public Expr {
         ParserType Type() const override {
             return ASSIGN;
         }
+        #ifdef COMPILER
         Result_MC* codegen() override {return nullptr;}
+        #endif
 };
 
 class Block : public Expr {
@@ -177,7 +197,9 @@ class Block : public Expr {
         ParserType Type() const override {
             return SCOPE;
         }
+        #ifdef COMPILER
         Result_MC* codegen() override {return nullptr;}
+        #endif
 };
 
 class IfStatement : public Expr {
@@ -192,7 +214,9 @@ class IfStatement : public Expr {
             return "If not implemented";
         }
         ParserType Type() const override { return IFSTATEMENT; }
+        #ifdef COMPILER
         Result_MC* codegen() override {return nullptr;}
+        #endif
 };
 
 class WhileLoop : public Expr {
@@ -206,7 +230,9 @@ class WhileLoop : public Expr {
             return "while loop not implemented";
         }
         ParserType Type() const override { return WHILELOOP; }
+        #ifdef COMPILER
         Result_MC* codegen() override {return nullptr;}
+        #endif
 };
 
 
@@ -224,7 +250,9 @@ class FuncCall : public Expr {
         ParserType Type() const override {
             return CALL;
         }
+        #ifdef COMPILER
         Result_MC* codegen() override {return nullptr;}
+        #endif
 };
 
 
@@ -249,7 +277,9 @@ class FuncDef : public Expr {
         ParserType Type() const override {
             return FUNC;
         }
+        #ifdef COMPILER
         Result_MC* codegen() override {return nullptr;}
+        #endif
 };
 
 class ReturnStmt : public Expr {
@@ -263,7 +293,9 @@ class ReturnStmt : public Expr {
         ParserType Type() const override {
             return RETURN;
         }
+        #ifdef COMPILER
         Result_MC* codegen() override {return nullptr;}
+        #endif
 };
 
 class ListStmt : public Expr {
@@ -275,7 +307,9 @@ class ListStmt : public Expr {
         ParserType Type() const override {
             return ParserType::LIST;
         }
+        #ifdef COMPILER
         Result_MC* codegen() override {return nullptr;}
+        #endif
 };
 
 class ListIndexStmt : public Expr {
@@ -288,7 +322,9 @@ class ListIndexStmt : public Expr {
         ParserType Type() const override {
             return LISTINDEX;
         }
+        #ifdef COMPILER
         Result_MC* codegen() override {return nullptr;}
+        #endif
 };
 
 

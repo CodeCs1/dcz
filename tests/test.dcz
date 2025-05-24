@@ -66,5 +66,5 @@
             ret [1,2,3,4];
         }[0]; NOT allowed this shit.
 ##
-int a = 3;
-a+1;
+int a = 12;
+Lprint "Hello world from Compiler!";

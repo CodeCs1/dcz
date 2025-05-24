@@ -1,6 +1,5 @@
 #include <RunAST.h>
 #include <iostream>
-
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
@@ -10,6 +9,10 @@ bool loopBlock=false;
 /*
     The most bloated way to Visit AST. (using a lot of std lib -> slow compilation + not optimizied)
 */
+
+#ifdef _WIN32
+#define realpath(N,R) _fullpath((R),(N),_MAX_PATH)
+#endif
 
 RunAST::RunAST(bool VerboseEnabled,std::string filename, std::list<SExpr> pars) : envi(filename)
 {
@@ -44,11 +47,6 @@ Result RunAST::ExecuteBlock(std::list<SExpr> node, Environment envi)
 
 void RunAST::UpdateGlobal() {
     this->globals = this->envi;
-}
-
-void RunAST::RunSingleOpcode()
-{
-    Visit(CurrentExpr());
 }
 
 
@@ -405,7 +403,7 @@ Result RunAST::Visit(SExpr Node)
 void RunAST::Run()
 {
     while(count < pars.size()) { 
-        RunSingleOpcode();
+        Visit(CurrentExpr());
         count++;
     }
 }

@@ -7,7 +7,7 @@ using namespace std;
 inline static Builder_MC builder=Builder_MC();
 inline static std::map<std::string, Result_MC*> ValueMap;
 Result_MC* Literal::codegen() {
-    return this->str.type == TokenType::STRING ? new Constant_MC(this->str.token) : new Constant_MC(std::stod(this->str.token));
+    return this->str.type == TokenType::STRING ? new Constant_MC(this->str.literal) : new Constant_MC(std::stod(this->str.literal));
 }
 
 Result_MC* Binary::codegen() {
@@ -42,6 +42,24 @@ Result_MC* Variable::codegen() {
         exit(1);
     }
     ValueMap[this->name.token] = this->expr->codegen();
+    return nullptr;
+}
+
+Result_MC* Statement::codegen() {
+
+    std::list<Result_MC*> arg1;
+    for (auto arg: this->args) arg1.push_back(arg->codegen());
+    if (this->name.token == "Lprint") {
+        for (auto arg : arg1) {
+            if (arg->v().str.has_value())
+                printf("%s ",arg->v().str.value().c_str());
+            if (arg->v().n.has_value())
+                printf("%f ",arg->v().n.value());
+        }
+        printf("\n");
+    }else if (this->name.token == "import") {
+        //TODO
+    }
     return nullptr;
 }
 

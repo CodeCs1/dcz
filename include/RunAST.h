@@ -28,10 +28,6 @@ struct EnvironmentVariable{
 };
 
 
-extern bool IsStrNum(std::string str);
-extern bool IsStrInt(std::string str);
-
-
 class Environment {
     private:
         std::vector<EnvironmentVariable> vars;
@@ -115,7 +111,6 @@ class RunAST {
         std::list<SExpr> pars;
         bool VerboseEnabled=false;
         std::string filename = "stdin";
-        void RunSingleOpcode();
         int count=0;
         SExpr CurrentExpr();
         Result Visit(SExpr Node);

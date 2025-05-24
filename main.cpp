@@ -3,7 +3,11 @@
 #include <Token.h>
 #include <Syntax.h>
 #include <RunAST.h>
+
+#include <config.h>
+#ifdef COMPILER
 #include <AST2MC.h>
+#endif
 #include <sstream>
 #include <cstring>
 
@@ -67,12 +71,17 @@ int main(int argc, char* argv[]) {
     if (!Compile) 
         RunAST(VerboseEnabled,filename,x).Run();
     else {
+        #ifdef COMPILER
         auto code = AST2MC(filename, x, memoryorigin).ReturnProg();
         cout << "Opcode:" << endl;
         for (auto c : code) {
             if (c.opcode.has_value())
                 cout << hex << c.opcode.value() << endl;
         }
+        #else
+            cerr << "Compiler option does not support. Consider enable compiler support and rebuild this program." <<endl;
+            return 1;
+        #endif
     }
 
     return 0;

@@ -10,6 +10,12 @@ Result_MC* Builder_MC::AddIntrBinary(Result_MC* L, Result_MC* R)
         return new Constant_MC(L->v().n.value() + R->v().n.value());
     }
     //TODO: Implement with variable and function call
+    /*For Variable and func call:
+
+        int a;
+        a + 1;
+
+    */
     return nullptr;
 }
 

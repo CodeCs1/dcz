@@ -6,3 +6,4 @@ testllvm*
 test.c
 test.S
 include/CLI
+include/config.h

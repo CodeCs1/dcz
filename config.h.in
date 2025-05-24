@@ -2,7 +2,7 @@
 #define CONFIG_H
 
 
-#define COMPILER
+#cmakedefine COMPILER
 
 
 #endif

@@ -17,13 +17,24 @@ FetchContent_MakeAvailable(CLI11)
 
 target_include_directories (CLI11 INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include")
 
+option(COMPILER "Support compile dcz file" OFF)
 
 file(GLOB AST "AST/*.cpp")
 file(GLOB ERROR_HANDLER "ErrorHandler/*.cpp")
+file(GLOB RUN_AST "RunAST/RunAST.cpp")
 
-file(GLOB AST2MC "AST2MC/*.cpp" "AST2MC/codegen/*.cpp")
+configure_file(
+    "${PROJECT_SOURCE_DIR}/config.h.in"
+    "${PROJECT_SOURCE_DIR}/include/config.h"
+)
 
 
-add_executable(dcz ${AST}  ${ERROR_HANDLER} ${AST2MC} main.cpp)
+set(AST2MC "")
+if (${COMPILER})
+    message("-- Adding compiler support.")
+    file(GLOB AST2MC "AST2MC/*.cpp" "AST2MC/codegen/*.cpp")
+endif()
+
+add_executable(dcz ${AST}  ${ERROR_HANDLER} ${AST2MC} ${RUN_AST} main.cpp)
 
 target_include_directories(dcz PUBLIC "include")

@@ -1,0 +1,8 @@
+*.asm
+testllvm*
+*build
+.vscode
+*.o
+test.c
+test.S
+include/CLI

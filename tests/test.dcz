@@ -1,0 +1,70 @@
+# test.dcz
+##
+    There are [5] data type, there includes:
+        char
+        int
+        short
+        long
+        unsigned
+        suu (a.k.a Real number)
+        float
+
+    Total Duca Compile Script Keywords:
+        func
+        if
+        else
+        for
+        foreach
+        while
+        class
+        export
+        [data types]
+    
+    Example code:
+        export unsigned char TRUE = 1;
+        export unsigned char FALSE = 0;
+
+    func _start() {
+        Lprint "hello world";
+        char t = 'a';
+    }
+
+    About variable thing.
+    assign using significant data type just like C
+    e.g:
+        char* a = 3;
+        t(a); #This function only allow int data type
+
+    [About suu data type]
+    * A little note:
+        When the compiler detected a variable that using suu as data type, it will show a warning.
+            test.dcz:1:1: warning: variable 'abcxyz' is using suu data type, which is unstable. Consider to use float instead.
+    * Also, please do not feed any data that not number to 'suu' data type
+    e.g:
+        suu g = "!??"; 
+        # Sometime it will throw this error message:
+        #    Get that trash outta my face. I've seen too much!
+        
+    and some basic calculation
+        suu t = 1 + 1; # -> 11
+        suu t = 1 - 1; # -> 11
+        suu t = 1 * 1; # -> 11
+        suu t = 1/1; # -> 11
+        suu t = 1/0; # -> 10 Yes, this can perform division by 0 too!
+        to avoid it, simply cover into partheness
+        eg: suu t = (1+1); # -> 2
+    and empty one.
+        suu empty;
+        # This message will only show when verbose is enabled.
+        # [Suu]: I still haven't singled out a number to date! >~<
+
+    about list:
+        list p = [1,2,3,4];
+        p[0];
+        Call()[0]; call from function.
+        func main {
+            ret [1,2,3,4];
+        }[0]; NOT allowed this shit.
+##
+int a = 3;
+a+1;

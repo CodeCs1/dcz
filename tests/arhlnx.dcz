@@ -1,0 +1,4 @@
+#This file used for oldschool project
+func printShowType(char s) {
+    Lprint s;
+}

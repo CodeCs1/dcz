@@ -1,0 +1,4 @@
+#[no_compile]
+func Dprint(any a) {
+    Lprint "[debug]: " a;
+}

@@ -14,7 +14,7 @@ Result_MC* Builder_MC::AddIntrBinary(Result_MC* L, Result_MC* R)
 
         int a;
         a + 1;
-
+        -> mov a; inc a (for optimization)
     */
     return nullptr;
 }

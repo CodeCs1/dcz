@@ -15,7 +15,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(CLI11)
 
-target_include_directories (CLI11 INTERFACE "${CMAKE_CURRENT_LIST_DIR}/include")
+include_directories(${CLI11_SOURCE_DIR}/include)
 
 option(COMPILER "Support compile dcz file" OFF)
 
